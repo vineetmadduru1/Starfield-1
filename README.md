@@ -19,7 +19,7 @@ Steps to completing this assignment
 5. Now modify the program so you have an array of NormalParticles.
 6. Run your program and make sure you can see all the particles move.
 6. Finish the Particle interface. It will list two methods:
-  * `public void show();`
+  * `public void show();` 
   * `public void move();`
 7. Have your NormalParticle `implement` the Particle interface.
 8. Add `public` in front of the `move()` & `show()` methods in your NormalParticle class.
