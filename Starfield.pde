@@ -1,124 +1,113 @@
-Particle[] part = new Particle[50];
-Particle[] odd = new Particle[1];
-Particle[] jum = new Particle[1];
+Particle[] normParticles = new NormalParticle[300];
+Particle[] oddParticles = new OddballParticle[2];
+Particle[] jumParticles = new JumboParticle[1];
 void setup()
 {
-	size(300,300);
-	for(int i=0;i<part.length;i++)
-	{
-		part[i]=new NormalParticle();
-	}
-	for(int a=0;a<odd.length;a++)
-	{
-		odd[a]=new OddballParticle();
-	}
-	for(int b=0;b<jum.length;b++)
-	{
-		jum[b]=new JumboParticle();
-	}
-	background(0);
+  size(1000,1000);
+   for(int a = 0; a < normParticles.length; a++) {
+      normParticles[a] = new NormalParticle();
+    }
+   for(int  b= 0; b < oddParticles.length; b++) {
+      oddParticles[b] = new OddballParticle();
+    }
+   for(int c = 0; c < jumParticles.length; c++) {
+      jumParticles[c] = new JumboParticle();
+    }
+    background(0);
 }
 void draw()
-{
-	fill(0,0,0,25);
-	rect(0,0,300,300);
-	for(int i=0;i<part.length;i++)
-	{
-	part[i].show();
-	part[i].move();
-
-	}
-	for(int a=0;a<odd.length;a++)
-	{
-	odd[a].show();
-	odd[a].move();
-
-	}
-	for(int b=0;b<jum.length;b++)
-	{
-	jum[b].show();
-	jum[b].move();
-
-	}			
+{   
+    fill(0,0,0,25);
+    rect(0,0,1000,1000);
+    for(int a= 0; a<normParticles.length; a++)
+    {
+      normParticles[a].show();
+      normParticles[a].move();
+    }
+    for(int b= 0; b<oddParticles.length; b++)
+    {
+      oddParticles[b].show();
+      oddParticles[b].move();
+    }
+    for(int c= 0; c<jumParticles.length; c++)
+    {
+      jumParticles[c].show();
+      jumParticles[c].move();
+    }
 }
 class NormalParticle implements Particle
 {
-	
-	double myX;
-	double myY;
-	double speed;
-	double angle;
-	int myColor;
-	NormalParticle()
-	{
-	myColor=250;
-	myX=150;
-	myY=150;
-	angle=(int)(Math.random()*360)+1;
-	speed=2;
-	}
-	public void move()	
-	{
-  		myX+=(Math.cos(angle)*speed);
-  		myY+=(Math.sin(angle)*speed);
-  		angle+=.03;
-	}
-	public void show()
-	{
-		noStroke();
-		fill(myColor);
-		ellipse((float)myX,(float)myY,5,5);
-		stroke(0);	
-	}
-	
+  int shapeColor; 
+  double dTheta = 2.03;
+  double dSpeed = 8.25;
+  double dX = 320;
+  double dY = 240;
+  NormalParticle(){
+    shapeColor =(int)(Math.random()*250)+1;
+    dX = 500;
+    dY =500;
+    dTheta = (int)(Math.random()*360)+1;
+    dSpeed = 20;
+  }
+  
+  void move(){
+    dTheta+=.07;
+    dX += Math.cos(dTheta)*dSpeed;
+    dY += Math.sin(dTheta)*dSpeed;
+  }
+  void show() {
+    fill((int)(Math.random()*250),(int)(Math.random()*250),(int)(Math.random()*250));
+    ellipse((float)dX,(float)dY,5,5);
+  }
 }
 interface Particle
 {
-	public void show();
-	
-	
-	public void move();
-	
-	
+  public void show();
+  public void move();
 }
-class OddballParticle implements Particle 
-{	
-	double myX;
-	double myY;
-	double speed;
-	double angle;
-	int myColor;
-	OddballParticle()
-	{
-	myColor=250;
-	myX=150;
-	myY=150;
-	angle=(int)(Math.random()*360)+1;
-	speed=2;
-	}
-	void move()
-	{
-	myX+=(Math.sin(angle)*speed);
-  	myY+=(Math.cos(angle)*speed);
-  	angle+=.04;
-	}
-	void show()
-	{
-	noStroke();
-	fill(myColor);
-	ellipse((float)myX,(float)myY,7,7);
-	stroke(0);
-	}
-
-}
-class JumboParticle extends NormalParticle
+class OddballParticle implements Particle
 {
-	public void show()
-	{
-		noStroke();
-		fill(myColor);
-		ellipse((float)myX,(float)myY,20,20);
-		stroke(0);	
-	}	
+  double dX;
+  double dY;
+  double dSpeed;
+  double dTheta;
+  int shapeColor;
+  OddballParticle()
+  {
+    background(0);
+  shapeColor=250;
+  dX=500;
+  dY=500;
+  dTheta=(int)(Math.random()*360)+1;
+  dSpeed=10;
+  }
+  void move()
+  {
+    dTheta+= .05;
+    dX+=(Math.sin(dTheta)*dSpeed);
+    dY+=(Math.cos(dTheta)*dSpeed);
+  }
+  void show()
+  {
+    fill(250);
+  ellipse((float)dX,(float)dY,25,25);
 }
-
+}
+class JumboParticle extends NormalParticle 
+{
+  double dX;
+  double dY;
+  double dSpeed;
+  double dTheta;
+  int shapeColor;
+  public void show()
+  {
+    fill(shapeColor);
+    ellipse((float)dX,(float)dY,50,50);
+  }
+  public void move(){
+    dTheta+= .05;
+    dX+=(Math.sin(dTheta)*dSpeed);
+    dY+=(Math.cos(dTheta)*dSpeed);
+  }  
+}
